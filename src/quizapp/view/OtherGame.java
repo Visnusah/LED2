@@ -26,24 +26,20 @@ public class OtherGame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        BackBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 548, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 194, Short.MAX_VALUE)
-        );
-
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
         jLabel1.setText("Game Two");
+
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,21 +49,25 @@ public class OtherGame extends javax.swing.JFrame {
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                    .addComponent(BackBtn))
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
+                .addComponent(BackBtn)
+                .addGap(41, 41, 41))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,7 +105,7 @@ public class OtherGame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

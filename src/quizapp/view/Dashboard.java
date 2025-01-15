@@ -45,6 +45,10 @@ public class Dashboard extends javax.swing.JFrame {
                     McqTest mcqTest = new McqTest();
                     mcqTest.setVisible(true);
                     dispose();
+                } else if(OtherGame.isSelected()) {
+                    OtherGame otherGame = new OtherGame();
+                    otherGame.setVisible(true);
+                    dispose();
                 }
             }
         });
@@ -64,7 +68,9 @@ public class Dashboard extends javax.swing.JFrame {
         ExitBtn.setText("Exit");
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.exit(0);
+                LoginForm loginForm = new LoginForm();
+                loginForm.setVisible(true);
+                dispose();
             }
         });
 

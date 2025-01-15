@@ -1,20 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package quizapp.view;
 
-/**
- *
- * @author sanju
- */
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 public class McqTest extends javax.swing.JFrame {
 
-    /**
-     * Creates new form McqTest
-     */
+    private String[][] questions = {
+        {"What is the capital of France?", "Paris", "London", "Berlin", "Madrid"},
+        {"Which planet is known as the Red Planet?", "Mars", "Venus", "Jupiter", "Saturn"},
+        {"What is the largest mammal in the world?", "Blue Whale", "African Elephant", "Giraffe", "Hippopotamus"},
+        {"Who painted the Mona Lisa?", "Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo"},
+        {"What is the chemical symbol for gold?", "Au", "Ag", "Fe", "Cu"}
+    };
+    
+    private int currentQuestion = 0;
+    private DefaultListModel<String> listModel;
+
     public McqTest() {
         initComponents();
+        listModel = new DefaultListModel<>();
+        jList1.setModel(listModel);
+        displayQuestion();
+        
+        // Add action listener for Exit button
+        ExitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Dashboard dashboard = new Dashboard();
+                dashboard.setVisible(true);
+                dispose();
+            }
+        });
+    }
+
+    private void displayQuestion() {
+        if (currentQuestion < questions.length) {
+            listModel.clear();
+            jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Question " + (currentQuestion + 1)));
+            
+            // Add question and choices
+            listModel.addElement(questions[currentQuestion][0]);  // Question
+            for(int i = 1; i <= 4; i++) {
+                listModel.addElement(i + ") " + questions[currentQuestion][i]);
+            }
+            
+            // Change Next button text to Submit on last question
+            if (currentQuestion == questions.length - 1) {
+                NextBtn.setText("Submit");
+            }
+        }
     }
 
     /**
@@ -36,11 +69,6 @@ public class McqTest extends javax.swing.JFrame {
 
         jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Question 1"));
         jList1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jScrollPane1.setViewportView(jList1);
 
@@ -94,7 +122,20 @@ public class McqTest extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NextBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextBtnActionPerformed
-        // TODO add your handling code here:
+        if (jList1.getSelectedIndex() < 1) {
+            JOptionPane.showMessageDialog(this, "Please select an answer!");
+            return;
+        }
+        
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            displayQuestion();
+        } else if (NextBtn.getText().equals("Submit")) {
+            JOptionPane.showMessageDialog(this, "Quiz Completed!");
+            Dashboard dashboard = new Dashboard();
+            dashboard.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_NextBtnActionPerformed
 
     /**

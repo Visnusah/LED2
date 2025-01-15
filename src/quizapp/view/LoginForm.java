@@ -110,6 +110,13 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         SignupBtn.setText("Signup");
+        SignupBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignupForm signup = new SignupForm();
+                signup.setVisible(true);
+                dispose();
+            }
+        });
 
         ExitBtn.setText("Exit");
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -225,12 +232,6 @@ public class LoginForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid credentials!");
         }
     }//GEN-LAST:event_SigninBtnMouseClicked
-
-    private void SignupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignupBtnMouseClicked
-        SignupForm signup = new SignupForm();
-        signup.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_SignupBtnMouseClicked
 
     /**
      * @param args the command line arguments
