@@ -1,14 +1,66 @@
 package quizapp.view;
 
 import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginForm extends javax.swing.JFrame {
 
     public LoginForm() {
         initComponents();
-        // Add placeholders
+        
+        // Set placeholders
         EmailField.setText("Enter Email");
         PasswordField.setText("Enter Password");
+        
+        // Add toggle button for password visibility
+        JToggleButton togglePassword = new JToggleButton("🙈");
+        togglePassword.setBounds(PasswordField.getX() + PasswordField.getWidth(), 
+                               PasswordField.getY(), 
+                               60, 
+                               PasswordField.getHeight());
+        
+        togglePassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (togglePassword.isSelected()) {
+                    PasswordField.setEchoChar((char)0);
+                    togglePassword.setText("🐵");
+                } else {
+                    PasswordField.setEchoChar('*');
+                    togglePassword.setText("🙈"); 
+                }
+            }
+        });
+        
+        jPanel1.add(togglePassword);
+        
+        // Add focus listeners for placeholder behavior
+        EmailField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().equals("Enter Email")) {
+                    EmailField.setText("");
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (EmailField.getText().isEmpty()) {
+                    EmailField.setText("Enter Email");
+                }
+            }
+        });
+        
+        PasswordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                if (String.valueOf(PasswordField.getPassword()).equals("Enter Password")) {
+                    PasswordField.setText("");
+                }
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                if (String.valueOf(PasswordField.getPassword()).isEmpty()) {
+                    PasswordField.setText("Enter Password");
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -58,11 +110,6 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         SignupBtn.setText("Signup");
-        SignupBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SignupBtnMouseClicked(evt);
-            }
-        });
 
         ExitBtn.setText("Exit");
         ExitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +139,7 @@ public class LoginForm extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(ExitBtn)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,8 +179,8 @@ public class LoginForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(LoginBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +207,23 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitBtnActionPerformed
 
     private void SigninBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SigninBtnMouseClicked
-        // TODO add your handling code here:
+        String email = EmailField.getText();
+        String password = String.valueOf(PasswordField.getPassword());
+        
+        // Don't process if placeholders are present
+        if(email.equals("Enter Email") || password.equals("Enter Password")) {
+            JOptionPane.showMessageDialog(this, "Please fill in all fields");
+            return;
+        }
+        
+        // Check demo credentials
+        if(email.equals("k@gmail.com") && password.equals("test")) {
+            Dashboard dashboard = new Dashboard();
+            dashboard.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid credentials!");
+        }
     }//GEN-LAST:event_SigninBtnMouseClicked
 
     private void SignupBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignupBtnMouseClicked
