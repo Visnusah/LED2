@@ -190,6 +190,18 @@ public class SignupForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please fill in all fields");
             return;
         }
+
+        // Validate email domain
+        if(!email.endsWith("@gmail.com") && !email.endsWith("@icloud.com")) {
+            JOptionPane.showMessageDialog(this, "Email must end with @gmail.com or @icloud.com");
+            return;
+        }
+
+        // Validate password length
+        if(password.length() < 4 || password.length() > 5) {
+            JOptionPane.showMessageDialog(this, "Password must be between 4-5 characters");
+            return;
+        }
         
         // Temporarily just show success and move to login
         JOptionPane.showMessageDialog(this, "Registration Successful!");
