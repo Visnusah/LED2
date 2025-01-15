@@ -1,5 +1,7 @@
 package quizapp.view;
 
+import javax.swing.ButtonGroup;
+
 public class Dashboard extends javax.swing.JFrame {
 
     /**
@@ -7,6 +9,11 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
+        
+        // Create button group for radio buttons
+        ButtonGroup gameGroup = new ButtonGroup();
+        gameGroup.add(MCQGameBtn);
+        gameGroup.add(OtherGame);
     }
     
     @SuppressWarnings("unchecked")
@@ -18,20 +25,31 @@ public class Dashboard extends javax.swing.JFrame {
         SectctBtn = new javax.swing.JButton();
         MCQGameBtn = new javax.swing.JRadioButton();
         OtherGame = new javax.swing.JRadioButton();
+        ExitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Select To Play"));
 
         jLabel1.setBackground(new java.awt.Color(0, 255, 204));
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 204));
         jLabel1.setText("Game");
         jLabel1.setToolTipText("");
 
         SectctBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         SectctBtn.setText("Select");
+        SectctBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if(MCQGameBtn.isSelected()) {
+                    McqTest mcqTest = new McqTest();
+                    mcqTest.setVisible(true);
+                    dispose();
+                }
+            }
+        });
 
+        MCQGameBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         MCQGameBtn.setText("MCQ Game");
         MCQGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -39,7 +57,16 @@ public class Dashboard extends javax.swing.JFrame {
             }
         });
 
+        OtherGame.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         OtherGame.setText("Other Game");
+
+        ExitBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        ExitBtn.setText("Exit");
+        ExitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                System.exit(0);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -48,32 +75,37 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(SectctBtn))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
+                        .addGap(170, 170, 170)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(MCQGameBtn))
+                        .addGap(149, 149, 149)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MCQGameBtn)
+                            .addComponent(OtherGame)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(OtherGame)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                        .addGap(101, 101, 101)
+                        .addComponent(SectctBtn)
+                        .addGap(41, 41, 41)
+                        .addComponent(ExitBtn)))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(MCQGameBtn)
                 .addGap(18, 18, 18)
                 .addComponent(OtherGame)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(SectctBtn)
-                .addGap(15, 15, 15))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SectctBtn)
+                    .addComponent(ExitBtn))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ExitBtn, SectctBtn});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,14 +114,14 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(117, 117, 117)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,6 +167,7 @@ public class Dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ExitBtn;
     private javax.swing.JRadioButton MCQGameBtn;
     private javax.swing.JRadioButton OtherGame;
     private javax.swing.JButton SectctBtn;
