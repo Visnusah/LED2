@@ -14,6 +14,33 @@ public class Dashboard extends javax.swing.JFrame {
         ButtonGroup gameGroup = new ButtonGroup();
         gameGroup.add(MCQGameBtn);
         gameGroup.add(OtherGame);
+        gameGroup.add(OtherGame1);
+        
+        // Add action listener for Select button
+        SectctBtn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (getMCQGameBtn().isSelected()) {
+                    new McqTest().setVisible(true);
+                    dispose();
+                } else if (getOtherGame().isSelected()) {
+                    new Synonyms().setVisible(true);
+                    dispose();
+                } else if (getOtherGame1().isSelected()) {
+                    new Antonyms().setVisible(true);
+                    dispose();
+                }
+            }
+        });
+        
+        // Add action listener for Back button
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dispose(); // Close current window
+                new LoginForm().setVisible(true); // Show login form
+            }
+        });
     }
     
     @SuppressWarnings("unchecked")
@@ -25,7 +52,8 @@ public class Dashboard extends javax.swing.JFrame {
         SectctBtn = new javax.swing.JButton();
         MCQGameBtn = new javax.swing.JRadioButton();
         OtherGame = new javax.swing.JRadioButton();
-        ExitBtn = new javax.swing.JButton();
+        BackBtn = new javax.swing.JButton();
+        OtherGame1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,22 +67,9 @@ public class Dashboard extends javax.swing.JFrame {
 
         SectctBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         SectctBtn.setText("Select");
-        SectctBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if(MCQGameBtn.isSelected()) {
-                    McqTest mcqTest = new McqTest();
-                    mcqTest.setVisible(true);
-                    dispose();
-                } else if(OtherGame.isSelected()) {
-                    OtherGame otherGame = new OtherGame();
-                    otherGame.setVisible(true);
-                    dispose();
-                }
-            }
-        });
 
         MCQGameBtn.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        MCQGameBtn.setText("MCQ Game");
+        MCQGameBtn.setText("MCQ");
         MCQGameBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MCQGameBtnActionPerformed(evt);
@@ -62,17 +77,18 @@ public class Dashboard extends javax.swing.JFrame {
         });
 
         OtherGame.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        OtherGame.setText("Other Game");
+        OtherGame.setText("Synonyms");
 
-        ExitBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        ExitBtn.setText("Exit");
-        ExitBtn.addActionListener(new java.awt.event.ActionListener() {
+        BackBtn.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginForm loginForm = new LoginForm();
-                loginForm.setVisible(true);
-                dispose();
+                BackBtnActionPerformed(evt);
             }
         });
+
+        OtherGame1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        OtherGame1.setText("Antonyms");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -87,12 +103,13 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGap(149, 149, 149)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(MCQGameBtn)
-                            .addComponent(OtherGame)))
+                            .addComponent(OtherGame)
+                            .addComponent(OtherGame1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(101, 101, 101)
                         .addComponent(SectctBtn)
                         .addGap(41, 41, 41)
-                        .addComponent(ExitBtn)))
+                        .addComponent(BackBtn)))
                 .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,14 +121,16 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(MCQGameBtn)
                 .addGap(18, 18, 18)
                 .addComponent(OtherGame)
+                .addGap(18, 18, 18)
+                .addComponent(OtherGame1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SectctBtn)
-                    .addComponent(ExitBtn))
+                    .addComponent(BackBtn))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ExitBtn, SectctBtn});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {BackBtn, SectctBtn});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +146,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -136,6 +155,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void MCQGameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MCQGameBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MCQGameBtnActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,19 +188,116 @@ public class Dashboard extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Dashboard().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Dashboard().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ExitBtn;
+    private javax.swing.JButton BackBtn;
     private javax.swing.JRadioButton MCQGameBtn;
     private javax.swing.JRadioButton OtherGame;
+    private javax.swing.JRadioButton OtherGame1;
     private javax.swing.JButton SectctBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the ExitBtn
+     */
+    public javax.swing.JButton getExitBtn() {
+        return BackBtn;
+    }
+
+    /**
+     * @param ExitBtn the ExitBtn to set
+     */
+    public void setExitBtn(javax.swing.JButton ExitBtn) {
+        this.BackBtn = ExitBtn;
+    }
+
+    /**
+     * @return the MCQGameBtn
+     */
+    public javax.swing.JRadioButton getMCQGameBtn() {
+        return MCQGameBtn;
+    }
+
+    /**
+     * @param MCQGameBtn the MCQGameBtn to set
+     */
+    public void setMCQGameBtn(javax.swing.JRadioButton MCQGameBtn) {
+        this.MCQGameBtn = MCQGameBtn;
+    }
+
+    /**
+     * @return the OtherGame
+     */
+    public javax.swing.JRadioButton getOtherGame() {
+        return OtherGame;
+    }
+
+    /**
+     * @param OtherGame the OtherGame to set
+     */
+    public void setOtherGame(javax.swing.JRadioButton OtherGame) {
+        this.OtherGame = OtherGame;
+    }
+
+    /**
+     * @return the OtherGame1
+     */
+    public javax.swing.JRadioButton getOtherGame1() {
+        return OtherGame1;
+    }
+
+    /**
+     * @param OtherGame1 the OtherGame1 to set
+     */
+    public void setOtherGame1(javax.swing.JRadioButton OtherGame1) {
+        this.OtherGame1 = OtherGame1;
+    }
+
+    /**
+     * @return the SectctBtn
+     */
+    public javax.swing.JButton getSectctBtn() {
+        return SectctBtn;
+    }
+
+    /**
+     * @param SectctBtn the SectctBtn to set
+     */
+    public void setSectctBtn(javax.swing.JButton SectctBtn) {
+        this.SectctBtn = SectctBtn;
+    }
+
+    /**
+     * @return the jLabel1
+     */
+    public javax.swing.JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    /**
+     * @param jLabel1 the jLabel1 to set
+     */
+    public void setjLabel1(javax.swing.JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    /**
+     * @return the jPanel1
+     */
+    public javax.swing.JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    /**
+     * @param jPanel1 the jPanel1 to set
+     */
+    public void setjPanel1(javax.swing.JPanel jPanel1) {
+        this.jPanel1 = jPanel1;
+    }
 }
